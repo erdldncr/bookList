@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    padding: 3%;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+header{
+    width: 100%;
+    text-align: center;
+    padding: 1%;
+    font-size: 2rem;
+    max-width: 100%;
+}
+.container{
+    width: 80%;
+}
+.light-blue{
+    color: lightblue;
+}
+.fas{
+    margin-right: 2%;
+}
+section{
+    padding: 2%;
+    width: 100%;
+}
+section input{
+    width: 100%;
+    padding: 10px;
+}
+table{
+    padding: 5px;
+    width: 100%
+}
+thead td{
+    font-weight: bold;
+    padding: 3px;
+    border-collapse: collapse;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
