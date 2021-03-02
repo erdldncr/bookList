@@ -80,6 +80,8 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
         console.log(book)
         /// add book to UI Class
         UI.addBookList(book)
+        ///show success message
+        UI.showAlert('The book has been added','success')
         ///clean the form
         UI.clearFields();
      }
@@ -89,5 +91,7 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
 //event remove a book
 document.querySelector('#book-list').addEventListener('click',(e)=>{
     UI.deleteBook(e.target)
-    // console.log(e.target)
+    
+    ///show delete message
+    UI.showAlert('The book deleted','success')
 })
