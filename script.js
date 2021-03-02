@@ -44,6 +44,17 @@ class UI{
             el.parentElement.parentElement.remove()
         }
     }
+    static showAlert(message,className){
+     const div=document.createElement('div')
+     div.className=`alert alert-${className}`
+     div.appendChild(document.createTextNode(message))
+     const container=document.querySelector('.container')
+     const form=document.querySelector('#book-form')
+     ////containerdan sonra formdan once div ekle
+     container.insertBefore(div,form) 
+     //// vanish in 3 seconds
+     setTimeout(()=>{document.querySelector('.alert').remove()},3000)
+    }
 
 }
 //store class handle storage
@@ -63,7 +74,7 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
      const isbn=document.getElementById('isbn').value
     ////validate
      if(title===''||author===''||isbn===''){
-        alert('please, fill all the forms')
+       UI.showAlert('please, fill all the forms',"danger")
      }else{
         const book= new Book(title,author,isbn)
         console.log(book)
