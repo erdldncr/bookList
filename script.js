@@ -9,19 +9,7 @@ class Book{
 //UI class: handle ui tasks
 class UI{
     static displayBooks(){
-        const storedBooks=[
-            {
-                title:'Ali baba ve kirk haramiler',
-                author:'Bilinmiyor',
-                isbn:'343437'
-            },
-            {
-                title:'Ali baba ve yirmi haramiler',
-                author:'Bilinmiyor',
-                isbn:'1234567'
-            }
-        ]
-        const books=storedBooks
+        const books=Store.getBooks()
         books.forEach((book)=>UI.addBookList(book))
     }
     static addBookList(book){
@@ -58,7 +46,34 @@ class UI{
 
 }
 //store class handle storage
+class Store{
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books')===null){
+            books=[]
+        }else{
+            books=JSON.parse(localStorage.getItem('books'))
+        }
+        return books
 
+    }
+    static addBook(book){
+        const books=Store.getBooks()
+        books.push(book)
+        localStorage.setItem('books',JSON.stringify(books))
+        
+
+    }
+    static removeBook(isbn){
+        const books=Store.getBooks()
+        books.forEach((book,index)=>{
+            if(book.isbn==isbn){
+                books.splice(index,1)
+            }
+        })
+        localStorage.setItem('books',JSON.stringify(books))
+    }
+}
 //event: Display Books
 
     document.addEventListener('DOMContentLoaded',UI.displayBooks)
@@ -80,6 +95,8 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
         console.log(book)
         /// add book to UI Class
         UI.addBookList(book)
+        /// add book to store
+        Store.addBook(book)
         ///show success message
         UI.showAlert('The book has been added','success')
         ///clean the form
@@ -91,6 +108,8 @@ document.querySelector('#book-form').addEventListener('submit',(e)=>{
 //event remove a book
 document.querySelector('#book-list').addEventListener('click',(e)=>{
     UI.deleteBook(e.target)
+  
+    Store.removeBook(e.target.parentElement.previousElementSibling)
     
     ///show delete message
     UI.showAlert('The book deleted','success')
